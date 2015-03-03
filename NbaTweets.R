@@ -6,9 +6,6 @@ library(car)
 ## PART 1 - COLLECTION
 ##
 
-## EnsurePackage tests if the package is installed using require() function
-## if the package is not installed (require() returns FALSE)
-## it installs the package
 EnsurePackage = function(x) {
   x=as.character(x)
   if (!require(x, character.only=TRUE)) {
@@ -16,10 +13,7 @@ EnsurePackage = function(x) {
     require(x, character.only=TRUE)
   }
 }
-##
 
-## PrepareTwitter makes sure that the packages
-## are loaded into R
 PrepareTwitter=function() {
   EnsurePackage("bitops")
   EnsurePackage("RCurl")
@@ -30,10 +24,7 @@ PrepareTwitter=function() {
 
 PrepareTwitter()
 
-## this is my work directory
-## you need to change it to Desktop or whatever folder you are using
-## on your own computer or on drive P:
-setwd("Desktop/QAC211/final")
+setwd("Desktop")
 
 ## the consumer key and consumer secret are saved in the file twt.txt
 ## first line is consumer key
@@ -55,18 +46,11 @@ credential = OAuthFactory$new(
   requestURL="https://api.twitter.com/oauth/request_token")
 
 
-## handshake() is a method defined for the object OAuthFactory
-## this is where you will need to copy a URL, open it in a browser
-## authorize the user and obtain the PIN code
 credential$handshake(cainfo="cacert.pem")
 
 ## this makes sure that our Twitter requests
 ## use the authorization object that we received
 registerTwitterOAuth(credential)
-
-## the tweet search function is userTimeline()
-##
-## THIS IS WHERE YOU WILL ENTER YOUR SEARCH STRING!
 
 #pull in new data
 
